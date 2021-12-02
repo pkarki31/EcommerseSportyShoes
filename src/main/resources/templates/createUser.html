@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Sporty Shoes Online Store</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<body >
+
+<style>
+
+    form {
+
+        margin-left : 25%;
+        width:550px;
+    }
+
+</style>
+
+
+<div>
+    <p>&nbsp</p>
+    <form th:action="@{/addUser}" th:object="${user}" method="post">
+
+        <p th:text="${updateProductMsg}"  />
+
+
+        <h1> Create User by filling below details  </h1>
+
+        <p>&nbsp</p>
+        <div>
+            User Name : <input type="text" class="form-control" name="name" th:value="${user.name}" required >
+        </div>
+
+        <p>&nbsp</p>
+
+        <div>
+            User Password: <input type="text" class="form-control" name="password" th:value="${user.password}" required>
+        </div>
+
+        <p>&nbsp</p>
+
+        <div>
+            City : <input type="text" class="form-control" name="city" th:value="${user.city}" required>
+        </div>
+
+        <p>&nbsp</p>
+
+        <div>
+            Contact Details : <input type="text" class="form-control" name="contact" th:value="${user.contact}" required >
+        </div>
+
+        <p>&nbsp</p>
+
+        <div>
+            Number of Orders till Date : <input type="text" class="form-control" name="numberofOrders" th:value="${user.numberofOrders}" required >
+        </div>
+
+        <p>&nbsp</p>
+
+        <div>
+
+            <button type="submit" class="form-control" >Create User</button>
+
+        </div>
+
+
+    </form>
+</div>
+
+
+
+</body>
+</html>

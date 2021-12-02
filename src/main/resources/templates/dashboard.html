@@ -1,0 +1,262 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Dashboard Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .styled-table {
+
+            margin: 30px 0;
+            font-size: 2em;
+            font-family: sans-serif;
+            min-width: 500px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 8px 35px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 4px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #009879;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        .button:hover {background-color: #3e8e41}
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
+        .city {
+            background-color: Orange;
+            color: black;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 20px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="city">
+    <marquee>
+        <h1>********   Welcome to Sporty Shoes Online Store   ******** </h1>
+    </marquee>
+
+    <div >
+        <a href="logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    </div>
+    <div >
+        <a th:href="@{/changePasswordPage}"><span class="glyphicon glyphicon-log-out"></span> Change Password</a>
+
+    </div>
+
+    <p th:text="${changePasswordMsg}"  />
+    <p th:text="${updateProductMsg}"  />
+    <a href="products"> <button class="button">View Products</button></a>
+    <a href="users"> <button class="button">View Users</button></a>
+    <a href="orders"> <button class="button">View Order's Report</button></a>
+
+
+    <p>&nbsp</p>
+    <div th:if="${ not#lists.isEmpty(product)}">
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Category</th>
+            <th>Update Product</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="prod : ${product}" onclick="orderRowClick(this)" >
+            <td><span th:text="${prod.name}">ProductName </span></td>
+            <td><span th:text="${prod.price}"> price </span></td>
+            <td><span th:text="${prod.size}"> size </span></td>
+            <td><span th:text="${prod.category}"> category </span></td>
+            <td>
+                <form th:action="@{/productUpdateToEdit}" th:object="${product}" method="post">
+                    <input type="hidden" name="name" th:value="${prod.name}">
+                    <input type="hidden" name="price" th:value="${prod.price}">
+                    <input type="hidden" name="size" th:value="${prod.size}">
+                    <input type="hidden" name="category" th:value="${prod.category}">
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+
+
+
+        </tr>
+
+        </tbody>
+
+        <a th:href="@{/createProduct}"><span class="glyphicon glyphicon-log-out"></span> Create Product</a>
+        <p th:text="${updateProductMsg}"  />
+    </table>
+    </div>
+
+    <p>&nbsp</p>
+    <div th:if="${ not#lists.isEmpty(users)}">
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>User Name</th>
+                <th>User Password</th>`
+                <th>City</th>
+                <th>Contact Number</th>
+                <th>Number of Order till Day</th>
+                <th>Update User</th>
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="user : ${users}" onclick="orderRowClick(this)" >
+                <td><span th:text="${user.name}">User Name </span></td>
+                <td><span th:text="${user.password}">User Password </span></td>
+                <td><span th:text="${user.city}"> city </span></td>
+                <td><span th:text="${user.contact}"> contact </span></td>
+                <td><span th:text="${user.numberofOrders}"> numberofOrders </span></td>
+                <td>
+                    <form th:action="@{/usersUpdateToEdit}" th:object="${users}" method="post">
+                        <input type="hidden" name="name" th:value="${user.name}">
+                        <input type="hidden" name="password" th:value="${user.password}">
+                        <input type="hidden" name="city" th:value="${user.city}">
+                        <input type="hidden" name="contact" th:value="${user.contact}">
+                        <input type="hidden" name="numberofOrders" th:value="${user.numberofOrders}">
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+
+            </tr>
+
+            </tbody>
+
+            <a th:href="@{/createUser}"><span class="glyphicon glyphicon-log-out"></span> Create Users</a>
+
+            <p>&nbsp</p>
+
+            <div>
+
+                <form th:action="@{/searchUser}"  method="get">
+
+            Search User By Name : <input type="text" class="form-control" id="name" name="name">
+                    <p>&nbsp</p>
+            <button type="submit">Search</button>
+
+            </form>
+
+            </div>
+        </table>
+    </div>
+
+    <p>&nbsp</p>
+    <div th:if="${ not#lists.isEmpty(orders)}">
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Product</th>`
+                <th>Category</th>
+                <th>Customer Name</th>
+                <th>Quantity</th>
+                <th>Order Date</th>
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="order : ${orders}" onclick="orderRowClick(this)" >
+                <td><span th:text="${order.id}">Order ID </span></td>
+                <td><span th:text="${order.product}">Product </span></td>
+                <td><span th:text="${order.category}"> category </span></td>
+                <td><span th:text="${order.userName}"> username </span></td>
+                <td><span th:text="${order.quantity}"> quantity </span></td>
+                <td><span th:text="${order.date}"> date </span></td>
+
+
+            </tr>
+
+            </tbody>
+
+            <a th:href="@{/createUser}"><span class="glyphicon glyphicon-log-out"></span> Create Users</a>
+
+            <p>&nbsp</p>
+
+            <div>
+
+                <form th:action="@{/searchUser}"  method="get">
+
+                    Search User By Name : <input type="text" class="form-control" id="name" name="name">
+                    <p>&nbsp</p>
+                    <button type="submit">Search</button>
+
+                </form>
+
+            </div>
+        </table>
+    </div>
+
+
+</div>
+
+
+</div>
+
+</body>
+</html>
