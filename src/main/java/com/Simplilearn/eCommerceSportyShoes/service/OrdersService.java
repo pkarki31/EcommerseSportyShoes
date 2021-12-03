@@ -8,7 +8,9 @@ import java.util.List;
 public interface OrdersService {
 	boolean save(Orders orders);
 	List<Orders> getOrders();
-	List<Orders> findByName(String name);
+	List<Orders> findAllByCategory(String category);
+
+	List<Orders> findAllByDate(String date);
 
 
 }

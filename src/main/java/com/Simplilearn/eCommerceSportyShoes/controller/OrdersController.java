@@ -30,19 +30,24 @@ public class OrdersController {
 
 		return "dashboard";
 	}
-//
-//	@GetMapping("/searchUser")
-//	public String searchUserByName(@RequestParam("name") String name,Model theModel) {
-//
-//		System.out.print("name : "+name);
-//
-//		theModel.addAttribute("users",usersService.findByName(name));
-//
-//		//System.out.print("product :"+prodService.getProdcuts());
-//
-//		return "dashboard";
-//		//return usersService.findByName(username);
-//	}
+
+	@GetMapping("/searchOrderByCategory")
+	public String searchOrderByCategory(@RequestParam("category") String category,Model theModel) {
+
+		theModel.addAttribute("orders",ordersService.findAllByCategory(category));
+
+		return "dashboard";
+
+	}
+
+	@GetMapping("/searchOrderByDate")
+	public String searchOrderByDate(@RequestParam("date") String date,Model theModel) {
+
+		theModel.addAttribute("orders",ordersService.findAllByDate(date));
+
+		return "dashboard";
+
+	}
 
 
 

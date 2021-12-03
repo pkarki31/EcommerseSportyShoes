@@ -78,4 +78,12 @@ public class LoginController {
 
 		return "changePasswordPage";
 	}
+
+	@GetMapping("/logOut")
+	public String logOut(Model theModel) {
+
+		theModel.addAttribute("text","Your are Logout Successfully ! ");
+
+		return "welcome";
+	}
 }

@@ -38,11 +38,20 @@ public class OrdersServiceImpl implements OrdersService {
 		return ordersRepository.findAll();
 	}
 
-	public List<Orders> findByName(String username) {
-		//System.out.println("username impl : "+username);
+	public List<Orders> findAllByCategory(String category) {
+		System.out.println("username impl : "+category);
 
 
-		List<Orders> orders = ordersRepository.findAllByUserName(username);
+		List<Orders> orders = ordersRepository.findAllByCategory(category);
+		System.out.println("user list size : " + orders.size());
+		return orders;
+	}
+
+	public List<Orders> findAllByDate(String date) {
+		System.out.println("username impl : "+date);
+
+
+		List<Orders> orders = ordersRepository.findAllByDate(date);
 		System.out.println("user list size : " + orders.size());
 		return orders;
 	}

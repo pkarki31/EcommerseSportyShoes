@@ -90,7 +90,7 @@
     </marquee>
 
     <div >
-        <a href="logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+        <a th:href="@{/logOut}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
     </div>
     <div >
         <a th:href="@{/changePasswordPage}"><span class="glyphicon glyphicon-log-out"></span> Change Password</a>
@@ -234,17 +234,25 @@
 
             </tbody>
 
-            <a th:href="@{/createUser}"><span class="glyphicon glyphicon-log-out"></span> Create Users</a>
-
-            <p>&nbsp</p>
-
             <div>
 
-                <form th:action="@{/searchUser}"  method="get">
+                <form th:action="@{/searchOrderByCategory}"  method="get">
 
-                    Search User By Name : <input type="text" class="form-control" id="name" name="name">
+                    Search User By Category : <input type="text" class="form-control" id="category" name="category">
                     <p>&nbsp</p>
-                    <button type="submit">Search</button>
+                    <button type="submit">Search By Category</button>
+
+                </form>
+
+            </div>
+            <p>&nbsp</p>
+            <div>
+
+                <form th:action="@{/searchOrderByDate}"  method="get">
+
+                    Search User By Date : <input type="text" class="form-control" id="date" name="date">
+                    <p>&nbsp</p>
+                    <button type="submit">Search By Date </button>
 
                 </form>
 

@@ -18,8 +18,11 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
 	Orders findByUserName(String name);
 
 
-	@Query("SELECT m FROM Orders m WHERE m.userName LIKE %:name%")
-	List<Orders> findAllByUserName(@Param(value = "name") String name);
+	@Query("SELECT m FROM Orders m WHERE m.category =:category")
+	List<Orders> findAllByCategory(@Param(value = "category") String category);
+
+	@Query("SELECT m FROM Orders m WHERE m.date LIKE %:date%")
+	List<Orders> findAllByDate(@Param(value = "date") String date);
 
 
 
